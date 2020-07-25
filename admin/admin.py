@@ -57,7 +57,7 @@ class AdminWindow(BoxLayout):
     def change_screen(self, instance):
         if instance.text == 'Manage Products':
             self.ids.scrn_mngr.current = 'scrn_product_content'
-        elif instance.text =='Manage Users':
+        elif instance.text =='customers INFO':
             self.ids.scrn_mngr.current = 'scrn_content'
         else:
             self.ids.scrn_mngr.current = 'scrn_analysis'
