@@ -204,6 +204,7 @@
                                 focus: True
                                 on_text_validate: date.select_all()
                                 on_text_validate: date.focus= True
+                                text: '5555'
                             TextInput:
                                 id: date
                                 hint_text: 'date'
@@ -211,6 +212,7 @@
                                 size_hint_x: .2
                                 on_text_validate: time.select_all()
                                 on_text_validate: time.focus= True
+                                text: '1400-01-01'
                             TextInput:
                                 id: time
                                 hint_text: 'time'
@@ -218,6 +220,7 @@
                                 size_hint_x: .2
                                 on_text_validate: amount.select_all()
                                 on_text_validate: amount.focus= True
+                                text: '010101'
                             TextInput:
                                 id: amount
                                 hint_text: 'amount'
@@ -225,6 +228,7 @@
                                 size_hint_x: .12
                                 on_text_validate: Source_Deposit.select_all()
                                 on_text_validate: Source_Deposit.focus= True
+                                text: '1000'
                             TextInput:
                                 id: Source_Deposit
                                 hint_text: 'Source Deposit'
@@ -232,6 +236,7 @@
                                 size_hint_x: .12
                                 on_text_validate: Destination_Deposit.select_all()
                                 on_text_validate: Destination_Deposit.focus= True
+                                text: ''
                             TextInput:
                                 id: Destination_Deposit
                                 hint_text: 'Destination Deposit'
@@ -239,12 +244,14 @@
                                 size_hint_x: .12
                                 on_text_validate: Branch_ID.select_all()
                                 on_text_validate: Branch_ID.focus= True
+                                text: '14'
                             TextInput:
                                 id: Branch_ID
                                 hint_text: 'Branch ID'
                                 multiline: False
                                 size_hint_x: .12
                                 on_text_validate: root.insert_data()
+                                text: ''
 
                         Button:
                             text: 'insert data in transaction table'
@@ -266,11 +273,13 @@
                             size_hint_y:.1
 
                         TextInput:
+                            id:voucherID_delete
                             hint_text: 'voucherID'
                             size_hint_y: None
                             height: 30
                             size_hint_x: .3
                             pos_hint: {'center_x': .5}
+                            on_text_validate: root.delete_data()
 
                         Button:
                             text: 'delete data from transaction table'
@@ -278,7 +287,7 @@
                             background_color: (.06,.47,.47,1)
                             size_hint_y: None
                             height: 40
-                            # on_release: root.delete_data()
+                            on_release: root.delete_data()
                             size_hint_x: .4
                             pos_hint: {'center_x': .5}
 
