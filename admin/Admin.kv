@@ -53,9 +53,11 @@
                         size_hint_y: None
                         height: 30
         Label:
+            size_hint_x: .09
+        Label:
             text: 'Admin Dashboard'
             bold: True
-            size_hint_x: .9
+            size_hint_x: .81
 
     BoxLayout:
         id: content_nav
@@ -71,7 +73,7 @@
                     size: self.size
                     pos: self.pos
             ToggleButton:
-                id:user_toggle
+                id:customer_toggle
                 size_hint_y: .1
                 text: 'customers INFO'
                 state: 'down'
@@ -81,17 +83,17 @@
                 on_state: root.change_screen(self)
 
             ToggleButton:
-                id:product_toggle
+                id:graph_toggle
                 size_hint_y: .1
-                text: 'Manage Products'
+                text: 'transaction path graph'
                 background_color: (.06,.47,.47,1)
                 background_normal: ''
                 group: 'admin_navs'
                 on_state: root.change_screen(self)
             ToggleButton:
-                id: analysys_toggle
+                id: CRUD_toggle
                 size_hint_y: .1
-                text: 'Product Analysys'
+                text: 'insert or delete data'
                 background_color: (.06,.47,.47,1)
                 background_normal: ''
                 group: 'admin_navs'
@@ -108,32 +110,72 @@
             ScreenManager:
                 id: scrn_mngr
                 Screen:
-                    id: scrn_content
-                    name: 'scrn_content'
+                    id: scrn_customerINFO
+                    name: 'scrn_customerINFO'
                     BoxLayout:
                         spacing: 20
                         orientation: 'vertical'
-                        id: Bscrn_content
+                        id: Bscrn_customerINFO
                         Spinner:
                             id: whatever
-                            text: "Choose a table"                   #default value showed
+                            text: "Choose a table"
+                            bold: True                 #default value showed
                             values: ["Customer table","transactions","Deposits", "Deposits type", "Deposits status", "Branchs"]
                             size_hint_y: None
                             height: 30
                             background_color: (.06,.47,.47,1)
                             background_normal: ''
                             on_text: root.on_spinner_select(self.text)
+                            size_hint_x: .2
+                            pos_hint: {'center_x': .5}
                         Label:
-                            # markup: True
-                        # Button:
-                        #     text: 'hi'
-                        #     size_hint_y: None
-                        #     height: 30
+
                 Screen:
-                    id: scrn_product_content
-                    name: 'scrn_product_content'
+                    id: scrn_graph
+                    name: 'scrn_graph'
+                    BoxLayout:
+                        orientation: 'vertical'
+                        spacing: 5
+                        TextInput:
+                            font_size: 20
+                            text: 'in here, you can enter a specific transaction to find the path which the money invloved in this transaction, has gone throgh, from the begining to the end.\n note that this path stop where the money goes out of the bank\n'
+                            readonly: True
+                            background_color: (.97,.97,.97,1)
+                            foreground_color: (.06,.45,.45,1)
+                            background_normal : ''
+                            font_name: 'Roboto-Bold'
+                            size_hint_y: None
+                            height: 130
+                        Label:
+                            size_hint_y: None
+                            height: 50
+                        TextInput:
+                            hint_text: 'enter voucherID of transaction'
+                            # foreground_color: (.06,.45,.45,1)
+                            font_name: 'Roboto-Bold'
+                            font_size: 12
+                            size_hint_y: None
+                            height: 40
+                            size_hint_x:.4
+                            multiline: False
+                        BoxLayout:
+                            size_hint_y: None
+                            height: 40
+                            spacing:20
+                            Button:
+                                text: 'create graph'
+                                bold: True
+                                size_hint_x: .3
+                                background_color: (.06,.47,.47,1)
+                                background_normal : ''
+                                on_release: root.create_graph()
+
+                            Label:
+                                size_hint_x: .7
+                        Label:
+
 
 
                 Screen:
                     id: scrn_analysis
-                    name: 'scrn_analysis'
+                    name: 'scrn_CRUD'

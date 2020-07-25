@@ -37,8 +37,6 @@ class DataTable(BoxLayout):
         rows_len = len(products[0])
         total_rows = len(products)
         self.columns = len(col_titles)
-        print(rows_len)
-        print(total_rows)
         table_data = []
         for t in col_titles:
             table_data.append({'text':str(t), 'size_hint_y':None, 'height':50, 'bcolor':(.06,.45,.45,1)})

@@ -9,11 +9,8 @@ import pyodbc
 class AdminWindow(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        # self.widgettable = Label()
-        # self.outtt()
 
     def on_spinner_select(self, text):
-        print (text)
         table_name = ''
         if text == 'Customer table':
             table_name = 'Customer'
@@ -28,9 +25,9 @@ class AdminWindow(BoxLayout):
         elif text == 'Branchs':
             table_name = 'Branch'
 
-        self.outtt(table_name)
+        self.SQLquery(table_name)
 
-    def outtt(self , table_name):
+    def SQLquery(self , table_name):
         conn = pyodbc.connect('Driver={SQL Server};'
                                   'Server=DESKTOP-7MGG4HH;'
                                   'Database=bank_trn;'
@@ -44,23 +41,20 @@ class AdminWindow(BoxLayout):
         SQLheaders = cursor.fetchall()
 
         self.widgettable = DataTable(table = SQLtable, SQLheaders = SQLheaders)
-        content = self.ids.Bscrn_content
+        content = self.ids.Bscrn_customerINFO
         content.clear_widgets()
         whatever = self.ids.whatever
 
         content.add_widget(whatever)
         content.add_widget(self.widgettable)
 
-
-
-
     def change_screen(self, instance):
-        if instance.text == 'Manage Products':
-            self.ids.scrn_mngr.current = 'scrn_product_content'
+        if instance.text == 'transaction path graph':
+            self.ids.scrn_mngr.current = 'scrn_graph'
         elif instance.text =='customers INFO':
-            self.ids.scrn_mngr.current = 'scrn_content'
+            self.ids.scrn_mngr.current = 'scrn_customerINFO'
         else:
-            self.ids.scrn_mngr.current = 'scrn_analysis'
+            self.ids.scrn_mngr.current = 'scrn_CRUD'
 
 
 
