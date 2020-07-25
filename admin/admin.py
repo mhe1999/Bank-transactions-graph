@@ -4,11 +4,15 @@ from kivy.uix.label import Label
 from pymongo import MongoClient
 from utils.datatable import  DataTable
 import pyodbc
+import re
+
 
 
 class AdminWindow(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+
 
     def on_spinner_select(self, text):
         table_name = ''
@@ -55,6 +59,30 @@ class AdminWindow(BoxLayout):
             self.ids.scrn_mngr.current = 'scrn_customerINFO'
         else:
             self.ids.scrn_mngr.current = 'scrn_CRUD'
+            # self.ids.voucherID.focus = 'True'
+
+    def insert_data(self):
+        if str(self.ids.voucherID.text) == '':
+            self.ids.error_message.text = '[color=#FF0000]voucherID cant be empty[/color]'
+        elif self.ids.voucherID.text.isnumeric() == False :
+            self.ids.error_message.text = '[color=#FF0000]voucherID should be a number[/color]'
+        elif self.ids.date.text == '':
+            self.ids.error_message.text = '[color=#FF0000]data cant be empty[/color]'
+        elif re.search('[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]',self.ids.date.text) == None:
+            self.ids.error_message.text = '[color=#FF0000]date should be in 1400-01-01 form[/color]'
+        elif self.ids.time.text == '':
+            self.ids.error_message.text = '[color=#FF0000]time cant be empty[/color]'
+        elif re.search('[0-2][0-9][0-6][0-9][0-6][0-9]',self.ids.time.text) == None:
+            self.ids.error_message.text = '[color=#FF0000]time should be in 246060 form[/color]'
+        elif str(self.ids.amount.text) == '':
+            self.ids.error_message.text = '[color=#FF0000]amount cant be empty[/color]'
+        elif self.ids.amount.text.isnumeric() == False :
+            self.ids.error_message.text = '[color=#FF0000]amount should be a number[/color]'
+        elif self.ids.Source_Deposit.text.isnumeric() == False and self.ids.Source_Deposit.text != '':
+            self.ids.error_message.text = '[color=#FF0000]Source_Deposit should be a number[/color]'
+        elif self.ids.Destination_Deposit.text.isnumeric() == False and self.ids.Destination_Deposit.text != '' :
+            self.ids.error_message.text = '[color=#FF0000]Destination_Deposit should be a number[/color]'
+
 
 
 

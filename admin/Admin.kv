@@ -13,6 +13,8 @@
     file_trigger: file_trigger.__self__
     file_dropdown: file_dropdown.__self__
 
+
+
     id: main_win
     orientation: 'vertical'
     canvas.before:
@@ -98,6 +100,8 @@
                 background_normal: ''
                 group: 'admin_navs'
                 on_state: root.change_screen(self)
+                on_release: root.ids.voucherID.focus = True
+
 
             Label:
                 id: sp
@@ -113,7 +117,7 @@
                     id: scrn_customerINFO
                     name: 'scrn_customerINFO'
                     BoxLayout:
-                        spacing: 20
+                        # spacing: 20
                         orientation: 'vertical'
                         id: Bscrn_customerINFO
                         Spinner:
@@ -128,6 +132,12 @@
                             on_text: root.on_spinner_select(self.text)
                             size_hint_x: .2
                             pos_hint: {'center_x': .5}
+                        Label:
+                            color: (.06,.47,.47,1)
+                            text: 'choose which table you want from the drop table'
+                            readonly: True
+                            size_hint_y: None
+                            height: 30
                         Label:
 
                 Screen:
@@ -179,3 +189,104 @@
                 Screen:
                     id: scrn_analysis
                     name: 'scrn_CRUD'
+                    BoxLayout:
+                        orientation: 'vertical'
+                        spacing: 10
+                        BoxLayout:
+                            spacing: 10
+                            size_hint_y: None
+                            height: 30
+                            TextInput:
+                                id: voucherID
+                                hint_text: 'voucherID'
+                                multiline: False
+                                size_hint_x: .12
+                                focus: True
+                                on_text_validate: date.select_all()
+                                on_text_validate: date.focus= True
+                            TextInput:
+                                id: date
+                                hint_text: 'date'
+                                multiline: False
+                                size_hint_x: .2
+                                on_text_validate: time.select_all()
+                                on_text_validate: time.focus= True
+                            TextInput:
+                                id: time
+                                hint_text: 'time'
+                                multiline: False
+                                size_hint_x: .2
+                                on_text_validate: amount.select_all()
+                                on_text_validate: amount.focus= True
+                            TextInput:
+                                id: amount
+                                hint_text: 'amount'
+                                multiline: False
+                                size_hint_x: .12
+                                on_text_validate: Source_Deposit.select_all()
+                                on_text_validate: Source_Deposit.focus= True
+                            TextInput:
+                                id: Source_Deposit
+                                hint_text: 'Source Deposit'
+                                multiline: False
+                                size_hint_x: .12
+                                on_text_validate: Destination_Deposit.select_all()
+                                on_text_validate: Destination_Deposit.focus= True
+                            TextInput:
+                                id: Destination_Deposit
+                                hint_text: 'Destination Deposit'
+                                multiline: False
+                                size_hint_x: .12
+                                on_text_validate: Branch_ID.select_all()
+                                on_text_validate: Branch_ID.focus= True
+                            TextInput:
+                                id: Branch_ID
+                                hint_text: 'Branch ID'
+                                multiline: False
+                                size_hint_x: .12
+                                on_text_validate: root.insert_data()
+
+                        Button:
+                            text: 'insert data in transaction table'
+                            background_normal: ''
+                            background_color: (.06,.47,.47,1)
+                            size_hint_y: None
+                            height: 40
+                            on_release: root.insert_data()
+                            size_hint_x: .4
+                            pos_hint: {'center_x': .5}
+                        Label:
+                            id: error_message
+                            text: ''
+                            markup: True
+                            size_hint_y:None
+                            height: 20
+
+                        Label:
+                            size_hint_y:.1
+
+                        TextInput:
+                            hint_text: 'voucherID'
+                            size_hint_y: None
+                            height: 30
+                            size_hint_x: .3
+                            pos_hint: {'center_x': .5}
+
+                        Button:
+                            text: 'delete data from transaction table'
+                            background_normal: ''
+                            background_color: (.06,.47,.47,1)
+                            size_hint_y: None
+                            height: 40
+                            # on_release: root.delete_data()
+                            size_hint_x: .4
+                            pos_hint: {'center_x': .5}
+
+                        Label:
+                            id: error_message_delete
+                            text: ''
+                            markup: True
+                            size_hint_y:None
+                            height: 20
+
+                        Label:
